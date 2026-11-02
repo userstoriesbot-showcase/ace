@@ -1,0 +1,15 @@
+# Showcase fork only (never part of an upstream pull request).
+# static.js is a plain Node http server with no dependencies; it reads the
+# port from PORT and the bind address from IP (default 0.0.0.0) and ignores CLI flags.
+# kitchen-sink.html loads the editor from src/ through demo/kitchen-sink/require.js,
+# so nothing has to be installed or built (npm install would pull a git dependency for nothing).
+version: 1
+app:
+  install: "node --version"
+  start: "PORT={port} IP=0.0.0.0 node static.js"
+  url: http://localhost:{port}
+  readyPath: /kitchen-sink.html
+  runtime: node22
+demo:
+  maxVideos: 1
+  beforePass: true
